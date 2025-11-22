@@ -1,5 +1,5 @@
 class Show < ApplicationRecord
   belongs_to :user
 
-  validates :name, :air_day, :air_time, :channel, presence: true
+  validates :show_name, :channel_name, presence: true
 end
