@@ -47,6 +47,6 @@ class Api::V1::ShowsController < ApplicationController
   end
 
   def show_params
-    params.require(:show).permit(:name, :air_day, :air_time, :channel)
+    params.require(:show).permit(:show_name, :air_day, :air_time, :channel_name, :channel_number, :available_on)
   end
 end

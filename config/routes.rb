@@ -17,9 +17,14 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  get 'shows', to: 'shows#index'
-  get 'shows/:id', to: 'shows#show'
-  post 'shows', to: 'shows#create'
-  put 'shows/:id', to: 'shows#update'
-  delete 'shows/:id', to: 'shows#destroy'
+  namespace :api do
+    namespace :v1 do
+      resources :shows, only: [:index, :show, :create, :update, :destroy]
+    end
+  end
+  # get 'shows', to: 'shows#index'
+  # get 'shows/:id', to: 'shows#show'
+  # post 'shows', to: 'shows#create'
+  # put 'shows/:id', to: 'shows#update'
+  # delete 'shows/:id', to: 'shows#destroy'
 end
