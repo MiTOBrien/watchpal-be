@@ -5,19 +5,19 @@ class Api::V1::ShowsController < ApplicationController
   # GET /api/v1/shows
   def index
     @shows = current_user.shows.order(:air_day, :air_time)
-    render json: @shows
+    render json: ShowSerializer.new(@shows).serializable_hash
   end
 
   # GET /api/v1/shows/:id
   def show
-    render json: @show
+    render json: ShowSerializer.new(@show).serializable_hash
   end
 
   # POST /api/v1/shows
   def create
     @show = current_user.shows.build(show_params)
     if @show.save
-      render json: @show, status: :created
+      render json: ShowSerializer.new(@show).serializable_hash, status: :created
     else
       render json: { errors: @show.errors.full_messages }, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class Api::V1::ShowsController < ApplicationController
   # PATCH/PUT /api/v1/shows/:id
   def update
     if @show.update(show_params)
-      render json: @show
+      render json: ShowSerializer.new(@show).serializable_hash
     else
       render json: { errors: @show.errors.full_messages }, status: :unprocessable_entity
     end
