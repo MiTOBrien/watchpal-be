@@ -8,4 +8,9 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
 
   has_many :shows, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
+
+  def subscribed?
+    subscriptions.where(status: "active").exists?
+  end
 end
